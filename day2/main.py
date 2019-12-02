@@ -7,7 +7,7 @@ def mul(opOne, opTwo):
     return opOne * opTwo
 
 def execute_program(noun, verb):
-    tmp_memory = list(memory)
+    tmp_memory = memory[:]
     tmp_memory[1] = noun
     tmp_memory[2] = verb
     opcode = tmp_memory[0]
@@ -27,14 +27,13 @@ def part_one():
     return tmp_memory[0]
 
 def part_two():
-    for noun in range(0, 100):
-        for verb in range(0, 100):
+    for noun in range(100):
+        for verb in range(100):
             tmp_memory = execute_program(noun, verb)
             if (tmp_memory[0] == 19690720):
                 return 100 * noun + verb
 
 if __name__ == '__main__':
-    memory = sys.stdin.readlines()[0].strip()
-    memory = [int(i) for i in memory.split(",")]
+    memory = [int(i) for i in sys.stdin.readlines()[0].strip().split(",")]
     print("p1: " + str(part_one()))
     print("p2: " + str(part_two()))
